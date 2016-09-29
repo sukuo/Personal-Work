@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flask</title>    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <strong><link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"></strong>
+  </head>
+  <body>
+     
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div class="container">
+  
+      <form action="/" method="POST" style="text-align: center;" >
+	<div   class="form-group"><br><br>
+	Origin Airport: <input type="text" name="Orig" class="form-control" style="text-align:center; "    value="LGA"><br>
+	Destination Airport: <input type="text" name="Dest" class="form-control" style="text-align:center;  "  value="ORD"><br>
+	 
+	       <select name='sortby'>
+		 <option value="Overall">Overall</option>
+		 <option value="Average Delay (min)">Average Delay (min)</option>
+		 <option value="Variance of Delays (min)">Variance of Delays (min)</option>
+		 <option value="Cabin">Cabin</option>
+		 <option value="Entertainment">Entertainment</option>
+		 <option value="Wifi">Wifi</option>
+		 <option value="Food/Beverage">Food/Beverage</option>
+		 <option value="Bang for Buck">Bang for Buck</option>
+	 
+	</select><br>
+	<div class="buttonHolder">
+	  <input type="submit" value="Submit">
+	  </div>
+      </form>
+      </div>
+     
+
+      <div id='divLine'></div>
+
+	<div align='center' class='results'>
+	  {% for result in results %}
+	  {{ result | safe }}
+	  {% endfor %}
+
+	</div>
+
+	<div id="logo_img_text">
+	  <table cellpadding=0 cellspacing=0 border=0>
+	    {% for logo in logos[0] %}
+	    <tr>
+	      <td class="image">{{ logo.img | safe }}</td>
+	      <td class="words">{{ logo.text | safe }}</td>
+	    </tr>
+	    {% endfor %}
+	  </table>
+
+	</div>
+	
+
+
+  </body>
+</html>
+
+
+{% for dict_item in parent_dict %}
+   This example has {{dict_item['A']}} and {{dict_item['B']}}:
+       with the content --
+       {% for item in dict_item['content'] %}{{item[0]}} and {{item[1]}}{% endfor %}.
+{% endfor %}
